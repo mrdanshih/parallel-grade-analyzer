@@ -6,7 +6,7 @@
 #include <iostream>
 #include "Student.h"
 
-std::vector<Student> parseFileIntoStudentArray(const std::string& filename);
+std::vector<Student> parseFileIntoStudentVector(const std::string& filename);
 
 
 

@@ -16,7 +16,7 @@ int main(int argc, char** argv)
 	int num_processes = 0;
 	int num_threads = 0;
 
-	std::vector<std::string> class_name{"os", "architecture", "java", "algorithm", "digital-design"};
+	std::vector<std::string> class_name{"./input/os.csv", "./input/architecture.csv", "./input/java.csv", "./input/algorithm.csv", "./input/digital-design.csv"};
 
 	// Check the argument and print error message if the argument is wrong
 	if(argc == 3 && (atoi(argv[1]) > 0 && atoi(argv[2]) > 0))

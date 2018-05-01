@@ -24,7 +24,12 @@ void get_statistics(std::vector<std::string> class_name, int num_processes, int 
 	*/
 
 	ProcessHandler handler{class_name, num_processes, num_threads};
-	handler.run_processes();
+	std::vector<std::vector<Student>> sorted_classes = handler.run_processes();
+
+	// Calculate stats - get a list of ClassStats.
+
+	// Write to files.
+
 
 	int status;
 	pid_t waiting_pid;

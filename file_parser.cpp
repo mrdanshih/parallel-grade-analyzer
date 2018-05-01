@@ -1,8 +1,12 @@
 #include "file_parser.h"
 
-std::vector<Student> parseFileIntoStudentArray(const std::string& filename) {
+std::vector<Student> parseFileIntoStudentVector(const std::string& filename) {
 	std::ifstream file;
 	file.open(filename);
+
+	if(file.fail()) {
+		throw std::exception();
+	}
 	
 	std::vector<Student> students;
 	std::string line;
@@ -15,6 +19,8 @@ std::vector<Student> parseFileIntoStudentArray(const std::string& filename) {
 		unsigned int commaIndex = line.find(",");
 		quint64 studentID = std::stol(line.substr(0, commaIndex));
 		float grade = std::stof(line.substr(commaIndex + 1));
+
+		students.push_back(Student{studentID, grade});
 	}
 
 	return students;

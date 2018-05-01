@@ -20,7 +20,6 @@ void get_statistics(std::vector<std::string> class_names, int num_processes, int
 // Each process has a list of filenames to process. 
 std::vector<std::vector<std::string>> create_processes(int num_processes, std::vector<std::string>& class_names);
 
-
 // Runs process.
 void run_processes(std::vector<std::vector<std::string>>& process_assignments);
 
