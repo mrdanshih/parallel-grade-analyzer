@@ -20,13 +20,15 @@ class ProcessHandler
 {
 public:
 	ProcessHandler(std::vector<std::string>& file_names, int max_num_processes, int max_num_threads);
-	std::vector<std::vector<Student>> run_processes();
+	
+	// Return vector of ClassInfo, with sorted students in each class, and sum of student scores.
+	std::vector<ClassInfo> run_processes();
 
 private:
 	int num_threads;
 	std::vector<std::vector<std::string>> process_file_assignments;
 
-	std::vector<std::vector<Student>> all_sorted_students;
+	std::vector<ClassInfo> all_sorted_classes;
 
 	void create_processes(std::vector<std::string>& file_names);
 	void execute_single_process(std::vector<std::string>& files);

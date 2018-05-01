@@ -8,8 +8,10 @@ struct Student {
 	float grade;
 };
 
-struct ClassStats {
+struct ClassInfo {
 	std::string className;
+	std::vector<Student> students;
+	quint64 score_sum;
 	float average;
 	float median;
 	float stdDev;

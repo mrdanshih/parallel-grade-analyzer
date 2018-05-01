@@ -1,6 +1,6 @@
 #include "file_parser.h"
 
-std::vector<Student> parseFileIntoStudentVector(const std::string& filename) {
+ClassInfo parseFileIntoClassInfo(const std::string& filename) {
 	std::ifstream file;
 	file.open(filename);
 
@@ -8,7 +8,7 @@ std::vector<Student> parseFileIntoStudentVector(const std::string& filename) {
 		throw std::exception();
 	}
 	
-	std::vector<Student> students;
+	ClassInfo classInfo;
 	std::string line;
 
 	// Skip header line
@@ -20,8 +20,8 @@ std::vector<Student> parseFileIntoStudentVector(const std::string& filename) {
 		quint64 studentID = std::stol(line.substr(0, commaIndex));
 		float grade = std::stof(line.substr(commaIndex + 1));
 
-		students.push_back(Student{studentID, grade});
+		classInfo.students.push_back(Student{studentID, grade});
 	}
 
-	return students;
+	return classInfo;
 }

@@ -24,16 +24,13 @@ void get_statistics(std::vector<std::string> class_name, int num_processes, int 
 	*/
 
 	ProcessHandler handler{class_name, num_processes, num_threads};
-	std::vector<std::vector<Student>> sorted_classes = handler.run_processes();
+	std::vector<ClassInfo> sorted_classes = handler.run_processes();
 
 	// Calculate stats - get a list of ClassStats.
 
 	// Write to files.
 
 
-	int status;
-	pid_t waiting_pid;
-	// try to wait for any children while there exists at least one
-	while ((waiting_pid = wait(&status)) > 0);
+	
 }
 
