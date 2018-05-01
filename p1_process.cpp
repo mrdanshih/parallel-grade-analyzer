@@ -23,9 +23,8 @@ void get_statistics(std::vector<std::string> class_name, int num_processes, int 
 
 	*/
 
-	std::vector<std::vector<std::string>> process_assignments = create_processes(num_processes, class_name);
-
-
+	ProcessHandler handler{class_name, num_processes, num_threads};
+	handler.run_processes();
 
 	int status;
 	pid_t waiting_pid;
@@ -33,26 +32,3 @@ void get_statistics(std::vector<std::string> class_name, int num_processes, int 
 	while ((waiting_pid = wait(&status)) > 0);
 }
 
-std::vector<std::vector<std::string>> create_processes(int num_processes, std::vector<std::string> class_names) {
-	std::vector<std::vector<std::string>> process_file_assignments{std::min((size_t) num_processes, class_names.size())};
-	std::cout << process_file_assignments.size() << std::endl;
-	int x = 0;
-	for (int i = 0; i < num_processes; i++) {
-	    switch(fork()) {
-	    	case 0: /* child */
-	    		printf("Child process is created. (pid: %d)\n", getpid());
-	    		x += i;
-	    		sleep(num_processes - i);
-	    		printf("Child process is terminated. (pid: %d)\n", getpid());
-	    		printf("CHILD X = %d\n", x);
-	    		exit(0);
-
-	    	case -1:
-	    		printf("FAILURE\n");
-	    		break;
-	    }
-	}
-
-	return process_file_assignments;
-
-}
