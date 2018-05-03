@@ -50,19 +50,7 @@ void ProcessHandler::execute_single_process(std::vector<std::string>& files) {
 	for(std::string& file: files) {
 		ClassInfo classInfo = parseFileIntoClassInfo(file);
 		size_t unsorted_students_size = classInfo.students.size();
-		std::vector<Student>& unsorted_students = classInfo.students;
-		// Partition list and make threads that do the parallel sorting (and sum computation)
-		int partition_length = std::ceil((float) unsorted_students_size / num_threads);
-
-		for(int thread_no = 0; thread_no < num_threads; ++thread_no) {
-			if(thread_no == num_threads - 1) {	// Last thread may have a little more.
-				printf("%d - %d\n", thread_no * partition_length, std::min((int) unsorted_students_size, (thread_no + 1) * partition_length));
-			} else {
-				printf("%d - %d\n", thread_no * partition_length, (thread_no + 1) * partition_length);
-			}
-			
-		}
-
+		perform_threaded_computations(classInfo, (unsigned int) std::min((int) unsorted_students_size, num_threads));
 	}
 
 }
