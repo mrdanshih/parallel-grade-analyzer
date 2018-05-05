@@ -22,34 +22,37 @@ void perform_threaded_computations(ClassInfo& classInfo, unsigned int num_thread
 
 		int lo = thread_no * partition_length;
 		int hi = std::min((int) unsorted_students_size, (thread_no + 1) * partition_length);
-		threadArgs.push_back(ThreadData{thread_no, classInfo, lo, hi});
+		printf("%d-%d.\n", lo, hi);
+		threadArgs.push_back(ThreadData{thread_no, classInfo, 0, lo, hi});
 	}
 
 	std::vector<pthread_t> threads{num_threads};
 
+
 	for(int thread_no = 0; thread_no < num_threads; ++thread_no) {
 		pthread_create(&threads[thread_no], NULL, thread_fn, &threadArgs[thread_no]);
 	}
+
 
 	// Block till all threads complete;
 	for(int thread_no = 0; thread_no < num_threads; ++thread_no) {
 		pthread_join(threads[thread_no], NULL);
 	}
 
-	// for(int thread_no = 0; thread_no < num_threads; ++thread_no) {
-	// 	printf("%d - %d\n", threadArgs[thread_no].array_low, threadArgs[thread_no].array_hi);
-	// }
 
-	std::cout << " EXIT THIS FUNCTION!" << std::endl;
-}
+	for(int thread_no = 0; thread_no < num_threads; ++thread_no) {
+		classInfo.score_sum += threadArgs[thread_no].thread_sum;
+	}
+
+	printf("MULTI-THREADED: %f\n", classInfo.score_sum);}
 
 void* thread_fn(void* arg) {
 	ThreadData* tData = (ThreadData*) arg;
-	ClassInfo classInfo = tData->classInfo;
+	ClassInfo& classInfo = tData->classInfo;
+
 	for(int i = tData->array_low; i < tData->array_hi; ++i) {
-		classInfo.score_sum += classInfo.students.at(i).grade;
+		tData->thread_sum += classInfo.students.at(i).grade;
 	}
-	tData->array_low = -150 + tData->thread_no;
-	tData->array_hi = 999 + + tData->thread_no;
+
 	pthread_exit(0);
 }

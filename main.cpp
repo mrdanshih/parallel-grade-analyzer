@@ -7,11 +7,12 @@
 
 #include "p1_process.h"
 #include "p1_threads.h"
+#include "Student.h"
 
 
 
 int main(int argc, char** argv)
-{
+{	
 	printf("Main process is created. (pid: %d)\n", getpid());
 	int num_processes = 0;
 	int num_threads = 0;

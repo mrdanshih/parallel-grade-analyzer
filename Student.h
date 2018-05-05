@@ -11,11 +11,12 @@ struct Student {
 struct ClassInfo {
 	std::string className;
 	std::vector<Student> students;
-	quint64 score_sum;
+	double score_sum;
 	float average;
 	float median;
 	float stdDev;
 };
+
 
 
 #endif

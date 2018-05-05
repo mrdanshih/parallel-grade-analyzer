@@ -10,6 +10,9 @@ ClassInfo parseFileIntoClassInfo(const std::string& filename) {
 	
 	ClassInfo classInfo;
 	classInfo.className = filename;	// Change to actual  className from filename.
+	classInfo.score_sum = 0;
+	classInfo.average = 0;
+	
 	std::string line;
 
 	// Skip header line

@@ -19,6 +19,7 @@ struct ThreadData {
 	int thread_no;
 
 	ClassInfo& classInfo;
+	double thread_sum; 	// This thread's sum of scores.
 
 	int array_low;	// Lowest index of list range that this thread is responsible for.
 	int array_hi;	// Highest index of list range that this thread is responsible for.
