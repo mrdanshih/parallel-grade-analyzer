@@ -17,19 +17,32 @@
 
 struct ClassInfo;
 
-struct ThreadData {
+struct SortThreadData {
 	int thread_no;
 
-	ClassInfo& classInfo;
+	std::vector<Student>& students;
 	double thread_sum; 	// This thread's sum of scores.
 
 	int array_low;	// Lowest index of list range that this thread is responsible for.
 	int array_hi;	// Highest index of list range that this thread is responsible for.
 };
 
-void perform_threaded_computations(ClassInfo& classInfo, unsigned int num_threads);
+struct MergeThreadData {
+	std::vector<Student>& students;
 
-void* thread_fn(void* arg);
+	int a_start;
+	int a_end;
+	int b_start;
+	int b_end;
+};
+
+void perform_threaded_computations(ClassInfo& classInfo, unsigned int num_threads);
+void merge_thread_sorted_sections(std::vector<SortThreadData>& sortThreadArgs, std::vector<Student>& students);
+std::vector<MergeThreadData> generateInitialMergeThreadArgs(std::vector<SortThreadData>& sortThreadArgs, std::vector<Student>& students);
+
+void* sort_thread_fn(void* arg);
+void* merge_thread_fn(void* arg);
+
 
 void merge_sort(int lo, int hi, std::vector<Student>& students);
 void merge(int a_start, int a_end, int b_start, int b_end, std::vector<Student>& students);

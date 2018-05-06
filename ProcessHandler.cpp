@@ -48,9 +48,9 @@ void ProcessHandler::execute_single_process(std::vector<std::string>& files) {
 		size_t unsorted_students_size = classInfo.students.size();
 		perform_threaded_computations(classInfo, (unsigned int) std::min((int) unsorted_students_size, num_threads));
 		
-		// for(Student& student: classInfo.students) {
-		// 	std::cout << std::setprecision(9) << student.grade << std::endl;
-		// }
+		for(Student& student: classInfo.students) {
+			std::cout << std::setprecision(9) << student.grade << std::endl;
+		}
 	}
 
 }
