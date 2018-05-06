@@ -9,8 +9,6 @@
 #include "p1_threads.h"
 #include "Student.h"
 
-
-
 int main(int argc, char** argv)
 {	
 	printf("Main process is created. (pid: %d)\n", getpid());
@@ -36,4 +34,5 @@ int main(int argc, char** argv)
 	return 0;
 	
 }
+
 

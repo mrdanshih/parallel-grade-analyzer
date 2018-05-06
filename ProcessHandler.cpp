@@ -1,4 +1,5 @@
 #include "ProcessHandler.h"
+#include <iomanip>
 
 ProcessHandler::ProcessHandler(std::vector<std::string>& file_names, int max_num_processes, int max_num_threads)
 	: num_threads{max_num_threads}, process_file_assignments{std::min((size_t) max_num_processes, file_names.size())}
@@ -46,6 +47,10 @@ void ProcessHandler::execute_single_process(std::vector<std::string>& files) {
 		ClassInfo classInfo = parseFileIntoClassInfo(file);
 		size_t unsorted_students_size = classInfo.students.size();
 		perform_threaded_computations(classInfo, (unsigned int) std::min((int) unsorted_students_size, num_threads));
+		
+		// for(Student& student: classInfo.students) {
+		// 	std::cout << std::setprecision(9) << student.grade << std::endl;
+		// }
 	}
 
 }

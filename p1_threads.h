@@ -5,9 +5,11 @@
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
+#include <utility>
 #include <pthread.h>
 
 #include "p1_process.h"
+#include "Student.h"
 
 // This header/source file handles the computations done by a single thread:
 // - sorting the list of students using mergesort
@@ -29,6 +31,7 @@ void perform_threaded_computations(ClassInfo& classInfo, unsigned int num_thread
 
 void* thread_fn(void* arg);
 
-void merge_sort(int lo, int hi, ClassInfo ClassInfo, unsigned int len);
+void merge_sort(int lo, int hi, std::vector<Student>& students);
+void merge(int a_start, int a_end, int b_start, int b_end, std::vector<Student>& students);
 
 #endif

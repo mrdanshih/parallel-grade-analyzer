@@ -1,4 +1,5 @@
 #include "file_parser.h"
+#include <iomanip>
 
 ClassInfo parseFileIntoClassInfo(const std::string& filename) {
 	std::ifstream file;
@@ -12,7 +13,7 @@ ClassInfo parseFileIntoClassInfo(const std::string& filename) {
 	classInfo.className = filename;	// Change to actual  className from filename.
 	classInfo.score_sum = 0;
 	classInfo.average = 0;
-	
+
 	std::string line;
 
 	// Skip header line
@@ -22,8 +23,7 @@ ClassInfo parseFileIntoClassInfo(const std::string& filename) {
 	while(std::getline(file, line)) {
 		unsigned int commaIndex = line.find(",");
 		quint64 studentID = std::stol(line.substr(0, commaIndex));
-		float grade = std::stof(line.substr(commaIndex + 1));
-
+		double grade = std::stod(line.substr(commaIndex + 1));
 		classInfo.students.push_back(Student{studentID, grade});
 	}
 
