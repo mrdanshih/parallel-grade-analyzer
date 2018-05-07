@@ -8,6 +8,7 @@
 #include <cmath>
 #include <pthread.h>
 #include <unistd.h>
+#include <vector>
 #include <algorithm>
 
 #include "p1_threads.h"
@@ -32,6 +33,9 @@ private:
 
 	void create_processes(std::vector<std::string>& file_names);
 	void execute_single_process(std::vector<std::string>& files);
+
+	// Calculate average, median, std. dev and populate that info in ClassInfo.
+	void calculate_stats(ClassInfo& classInfo);
 };
 
 #endif

@@ -22,7 +22,7 @@ void perform_threaded_computations(ClassInfo& classInfo, unsigned int num_thread
 		// Determine the lo & hi indices of this thread's partiion of the array.
 		int lo = thread_no * partition_length;
 		int hi = std::min((int) unsorted_students_size, (thread_no + 1) * partition_length) - 1;
-		printf("%d - %d\n", lo, hi);
+		// printf("%d - %d\n", lo, hi);
 		threadArgs.push_back(SortThreadData{thread_no, classInfo.students, 0, lo, hi});
 	}
 
@@ -46,11 +46,9 @@ void perform_threaded_computations(ClassInfo& classInfo, unsigned int num_thread
 
 	// merge sorted sections done by each thread
 
-	printf("MULTI-THREADED: %f\n", classInfo.score_sum);
+	// printf("MULTI-THREADED: %f\n", classInfo.score_sum);
 	merge_thread_sorted_sections(threadArgs, classInfo.students);
 }
-
-
 
 void merge_thread_sorted_sections(std::vector<SortThreadData>& sortThreadArgs, std::vector<Student>& students) {
 	// Based on algorithm described here: https://courses.engr.illinois.edu/cs241/fa2012/assignments/mergesort/
@@ -60,10 +58,10 @@ void merge_thread_sorted_sections(std::vector<SortThreadData>& sortThreadArgs, s
 	MergeThreadData* oddOneOutSection = nullptr;
 
 	while(mergeThreadArgs.size() > 1 || oddOneOutSection != nullptr) {
-		printf("SIZE IS: %lu\n", mergeThreadArgs.size());
+		// printf("SIZE IS: %lu\n", mergeThreadArgs.size());
 		if(mergeThreadArgs.size() % 2 == 1 && oddOneOutSection != nullptr) {
 			mergeThreadArgs.push_back(*oddOneOutSection);
-			std::cout << "ADDING BACK IN THE ODD ONE OUT" << std::endl;
+			// std::cout << "ADDING BACK IN THE ODD ONE OUT" << std::endl;
 			oddOneOutSection = nullptr;
 
 		}
@@ -72,7 +70,7 @@ void merge_thread_sorted_sections(std::vector<SortThreadData>& sortThreadArgs, s
 		// Delegate adjacent sections to merge to the threads.
 			if(i == mergeThreadArgs.size() - 1) {
 				oddOneOutSection = &mergeThreadArgs.at(i);
-				printf("ODD ONE OUT: %d - %d\n", mergeThreadArgs.at(i).a_start, mergeThreadArgs.at(i).b_end);
+				// printf("ODD ONE OUT: %d - %d\n", mergeThreadArgs.at(i).a_start, mergeThreadArgs.at(i).b_end);
 
 			} else {
 				int a_start =  mergeThreadArgs.at(i).a_start;
@@ -101,7 +99,7 @@ void merge_thread_sorted_sections(std::vector<SortThreadData>& sortThreadArgs, s
 		currentMergeThreadArgs.clear();
 	}
 
-	std::cout << "DONE! " << std::endl;
+	// std::cout << "DONE! " << std::endl;
 	
 }
 
@@ -136,7 +134,7 @@ void* sort_thread_fn(void* arg) {
 
 void* merge_thread_fn(void* arg) {
 	MergeThreadData* tData = (MergeThreadData*) arg;
-	std::cout << "START MERGE" << std::endl;
+	// std::cout << "START MERGE" << std::endl;
 	merge(tData->a_start, tData->a_end, tData->b_start, tData->b_end, tData->students);
 	pthread_exit(0);
 }
@@ -159,7 +157,6 @@ void merge_sort(int lo, int hi, std::vector<Student>& students) {
 	merge_sort(mid + 1, hi, students);
 	merge(lo, mid, mid + 1, hi, students);
 }
-
 
 void merge(int a_start, int a_end, int b_start, int b_end, std::vector<Student>& students) {
 

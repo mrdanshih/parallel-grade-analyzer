@@ -14,7 +14,7 @@
 #include "Student.h"
 #include "ProcessHandler.h"
 
-void get_statistics(std::vector<std::string> class_names, int num_processes, int num_threads);
+void get_statistics(std::vector<std::string>& class_names, int num_processes, int num_threads);
 
 // Creates an array of processes, up to the maximum number of processes (minimum of # processes + file names.)
 // Each process has a list of filenames to process. 

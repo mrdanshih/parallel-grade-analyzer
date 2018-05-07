@@ -8,6 +8,6 @@
 
 ClassInfo parseFileIntoClassInfo(const std::string& filename);
 
-
+void writeFilesFromClassInfo(ClassInfo& classInfo);
 
 #endif

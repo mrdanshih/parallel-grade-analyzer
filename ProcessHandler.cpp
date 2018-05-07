@@ -20,7 +20,6 @@ std::vector<ClassInfo> ProcessHandler::run_processes() {
 	    switch(fork()) {
 	    	case 0: /* child */
 	    		// EXECUTE process  with given file list.
-
 	    		printf("Child process is created, has %d files. (pid: %d)\n", (int) process_file_assignments.at(i).size(), getpid());
 	    		execute_single_process(process_file_assignments.at(i));
 	    		printf("Child process is terminated. (pid: %d)\n", getpid());
@@ -48,11 +47,34 @@ void ProcessHandler::execute_single_process(std::vector<std::string>& files) {
 		size_t unsorted_students_size = classInfo.students.size();
 		perform_threaded_computations(classInfo, (unsigned int) std::min((int) unsorted_students_size, num_threads));
 		
-		for(Student& student: classInfo.students) {
-			std::cout << std::setprecision(9) << student.grade << std::endl;
-		}
+		// for(Student& student: classInfo.students) {
+		// 	std::cout << std::fixed << std::setprecision(10) << student.grade << std::endl;
+		// }
+
+		calculate_stats(classInfo);
+		writeFilesFromClassInfo(classInfo);
+	}
+}
+
+void ProcessHandler::calculate_stats(ClassInfo& classInfo) {
+	std::vector<Student>& students = classInfo.students;
+	// Mean.
+	classInfo.average = classInfo.score_sum / students.size();
+	// Median.
+	int mid = students.size() / 2;
+	if(students.size() % 2 == 0) {
+		classInfo.median = (students.at(mid).grade + students.at(mid + 1).grade) / 2;
+	} else {
+		classInfo.median = students.at(mid).grade;
 	}
 
+	// Standard dev.
+	double sq_diff_sum = 0;
+	for(Student& student: students) {
+		sq_diff_sum += std::pow(student.grade - classInfo.average, 2);
+	}
+
+	classInfo.stdDev = std::sqrt(sq_diff_sum / students.size());
 }
 
 
