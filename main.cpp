@@ -42,7 +42,7 @@ int main(int argc, char** argv)
 	else
 	{
 		printf("[ERROR] Expecting 2 arguments with integral value greater than zero.\n");
-		printf("[USAGE] p1_exec <number of processes> <number of threads>\n");
+		printf("[USAGE] grade_analyzer <number of processes> <number of threads>\n");
 	}
 	printf("Main process is terminated. (pid: %d)\n", getpid());
 	return 0;
