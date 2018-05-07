@@ -1,7 +1,7 @@
 # parallel-grade-analyzer
 A command-line C++ program that processes large input files containing students' grades in classes using multiprocessing and multithreading for concurrency and parallelism.
 
-Usage: `grade analyzer <# of processes> <# of threads>`
+Usage: `grade_analyzer <# of processes> <# of threads>`
 
 Program is executed via command line, taking arguments for max # of processes and # of threads to spawn.
 
