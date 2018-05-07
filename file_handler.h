@@ -1,5 +1,5 @@
-#ifndef _FILE_PARSER
-#define _FILE_PARSER
+#ifndef _FILE_HANDLER
+#define _FILE_HANDLER
 
 #include <fstream>
 #include <vector>

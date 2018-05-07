@@ -1,4 +1,4 @@
-EXEC=p1_exec
+EXEC=grade_analyzer
 
 CC=g++
 CFLAGS=-std=c++11 -I.
@@ -7,8 +7,8 @@ CFLAGS=-std=c++11 -I.
 %.o: %.cpp
 	$(CC) -c $< $(CFLAGS)
 
-${EXEC}: main.o p1_process.o p1_threads.o file_parser.o ProcessHandler.o
-	g++ -o ${EXEC} main.o p1_process.o p1_threads.o file_parser.o ProcessHandler.o -I. -lpthread 
+${EXEC}: main.o multithreading.o file_handler.o GradeProcessor.o
+	g++ -o ${EXEC} main.o multithreading.o file_handler.o GradeProcessor.o -I. -lpthread 
 
 
 clean:

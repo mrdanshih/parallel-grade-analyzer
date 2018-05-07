@@ -5,10 +5,10 @@
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
+#include <cmath>
 #include <utility>
 #include <pthread.h>
 
-#include "p1_process.h"
 #include "Student.h"
 
 // This header/source file handles the computations done by a single thread:

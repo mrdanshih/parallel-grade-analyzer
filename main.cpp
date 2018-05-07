@@ -6,9 +6,16 @@
 #include <chrono>
 #include <pthread.h>
 
-#include "p1_process.h"
-#include "p1_threads.h"
+#include "GradeProcessor.h"
 #include "Student.h"
+
+void get_statistics(std::vector<std::string>& class_name, int num_processes, int num_threads) {
+
+	GradeProcessor processor{class_name, num_processes, num_threads};
+	// Run processes - sorts students by grades, and calculate stats.
+	std::vector<ClassInfo> processed_classes = processor.run_processes();	
+}
+
 
 int main(int argc, char** argv)
 {	
@@ -41,5 +48,11 @@ int main(int argc, char** argv)
 	return 0;
 	
 }
+
+
+
+
+
+
 
 

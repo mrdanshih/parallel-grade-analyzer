@@ -1,19 +1,19 @@
-#include "ProcessHandler.h"
+#include "GradeProcessor.h"
 #include <iomanip>
 
-ProcessHandler::ProcessHandler(std::vector<std::string>& file_names, int max_num_processes, int max_num_threads)
+GradeProcessor::GradeProcessor(std::vector<std::string>& file_names, int max_num_processes, int max_num_threads)
 	: num_threads{max_num_threads}, process_file_assignments{std::min((size_t) max_num_processes, file_names.size())}
 {
 	create_processes(file_names);
 }
 
-void ProcessHandler::create_processes(std::vector<std::string>& file_names) {
+void GradeProcessor::create_processes(std::vector<std::string>& file_names) {
 	for(int i = 0; i < file_names.size(); ++i) {
 		process_file_assignments.at(i % process_file_assignments.size()).push_back(file_names.at(i));
 	}
 }
 
-std::vector<ClassInfo> ProcessHandler::run_processes() {
+std::vector<ClassInfo> GradeProcessor::run_processes() {
 	all_sorted_classes.clear();
 
 	for (int i = 0; i < process_file_assignments.size(); ++i) {
@@ -41,7 +41,7 @@ std::vector<ClassInfo> ProcessHandler::run_processes() {
 
 }
 
-void ProcessHandler::execute_single_process(std::vector<std::string>& files) {
+void GradeProcessor::execute_single_process(std::vector<std::string>& files) {
 	for(std::string& file: files) {
 		ClassInfo classInfo = parseFileIntoClassInfo(file);
 		size_t unsorted_students_size = classInfo.students.size();
@@ -56,7 +56,7 @@ void ProcessHandler::execute_single_process(std::vector<std::string>& files) {
 	}
 }
 
-void ProcessHandler::calculate_stats(ClassInfo& classInfo) {
+void GradeProcessor::calculate_stats(ClassInfo& classInfo) {
 	std::vector<Student>& students = classInfo.students;
 	// Mean.
 	classInfo.average = classInfo.score_sum / students.size();

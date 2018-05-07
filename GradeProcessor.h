@@ -1,5 +1,5 @@
-#ifndef __PROCESS_HANDLER
-#define __PROCESS_HANDLER
+#ifndef __GRADE_ANALYZER
+#define __GRADE_ANALYZER
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,16 +11,16 @@
 #include <vector>
 #include <algorithm>
 
-#include "p1_threads.h"
-#include "file_parser.h"
+#include "multithreading.h"
+#include "file_handler.h"
 #include "Student.h"
 
-// ProcessHandler class?
+// GradeProcessor class?
 // 	Initializes and runs processes.
-class ProcessHandler
+class GradeProcessor
 {
 public:
-	ProcessHandler(std::vector<std::string>& file_names, int max_num_processes, int max_num_threads);
+	GradeProcessor(std::vector<std::string>& file_names, int max_num_processes, int max_num_threads);
 	
 	// Return vector of ClassInfo, with sorted students in each class, and sum of student scores.
 	std::vector<ClassInfo> run_processes();
